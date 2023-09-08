@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{% static 'css/all.css' %}">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <!-- Custom -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      
+        <title>eEstate {% block title%} {% endblock %}</title>
+      </head>
+      <style>
+        #showcase {
+            background-image: url({% static "img/showcase.jpg" %});
+        }
+      </style>
+    <body>
+        <!-- topbar section -->
+        {% include 'partials/_headers.html' %}
+        <!-- navbar section -->
+        {% include 'partials/_navbar.html' %}
+
+
+        <!-- conent block start -->
+        {% block content %}
+        <!-- conent block end -->
+
+
+        {% endblock %}
+        <!-- footer section -->
+       {% include 'partials/_footer.html' %}
+    </body>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
+  <script src="{% static 'js/main.js' %} "></script>
+</html>
