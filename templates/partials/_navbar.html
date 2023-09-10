@@ -3,7 +3,13 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
       <a class="navbar-brand" href="{% url 'index' %}">
-        <img src="{% static 'img/logo.png' %}" class="logo" alt="">
+        {% if settings and settings.logo %}
+        
+        <img src="{{settings.logo.url}}" class="logo" alt="{{settings.title}} " title="{{settings.title}} ">
+
+        {%else%}
+          <img src="{% static 'img/logo.png' %}" class="logo" alt="{{settings.title}} " title="{{settings.title}} ">
+        {%endif%}
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
         <span class="navbar-toggler-icon"></span>

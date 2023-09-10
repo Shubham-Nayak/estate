@@ -3,11 +3,13 @@ from django.http import HttpResponse,JsonResponse
 from .models import Listing
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 from .choices import state_choices,bedroom_choices,price_choices
+from settings.models import Setting
 
 # Create your views here.
 
 
 def index(request):
+    settings=Setting.objects.all()
     listings= Listing.objects.order_by('-list_date').filter(is_published=True)
    
 
@@ -15,18 +17,22 @@ def index(request):
     page= request.GET.get('page')
     paged_listings= paginator.get_page(page)
     contex={
-        "listings":paged_listings
+        "listings":paged_listings,
+        "settings":settings
     }
     return render(request,'listings/listings.html',contex)
 
 def listing(request,listing_id):
+    settings=Setting.objects.all()
     listing= get_object_or_404(Listing,pk=listing_id)
     contex={ 
-        "listing":listing
+        "listing":listing,
+        "settings":settings
     }
     return render(request,'listings/listing.html',contex)
 
 def search(request):
+    settings=Setting.objects.all()
     query_listing= Listing.objects.order_by('-list_date').filter(is_published=True)
     
     if 'keywords' in request.GET:
@@ -58,7 +64,8 @@ def search(request):
         "bedroom_choices":bedroom_choices,
         "price_choices":price_choices,
         "listings":query_listing,
-        "values":request.GET
+        "values":request.GET,
+        "settings":settings
 
     }
     return render(request,'listings/search.html',contex)

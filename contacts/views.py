@@ -7,6 +7,7 @@ from .models import Contact
 from django.core.mail import send_mail
 
 
+
 def index(request):
     if request.method == 'POST':
                 listing= request.POST['listing']

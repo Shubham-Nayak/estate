@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 
 from django.contrib.messages import constants as messages
+# from sttings.models import Setting
 
 
 MESSAGE_TAGS = {
@@ -169,4 +170,6 @@ EMAIL_PORT=587
 EMAIL_HOST_USER='impulsivetechnology@gmail.com'
 EMAIL_HOST_PASSWORD='quqfflkelucxfnpe'
 EMAIL_USE_TLS=True
+
+TEST="hjhj"
 

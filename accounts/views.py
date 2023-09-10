@@ -4,6 +4,7 @@ from django.contrib import messages,auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from contacts.models import Contact
+from settings.models import Setting
 
 
 # from .models import Listing
@@ -13,11 +14,13 @@ from contacts.models import Contact
 # Create your views here.
 
 def index(request):
+    settings=Setting.objects.all()
     if request.user.is_authenticated:
         return redirect('dashboard')
     else:
         contex={
-            "values":request.POST
+            "values":request.POST,
+            "settings":settings
         }
         
         if request.method == 'POST':
@@ -36,11 +39,13 @@ def index(request):
             return render(request,'accounts/login.html',contex)
 
 def register(request):
+    settings=Setting.objects.all()
     if request.user.is_authenticated:
         return redirect('dashboard')
     else:
         contex={
-            "values":request.POST
+            "values":request.POST,
+            "settings":settings
         }
         if request.method == 'POST':
             first_name= request.POST['first_name']
@@ -72,10 +77,12 @@ def register(request):
 
 
 def dashboard(request):
+    settings=Setting.objects.all()
     if request.user.is_authenticated:
         contact_list= Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
         contex={
-            "contacts":contact_list
+            "contacts":contact_list,
+            "settings":settings
         }
 
         return render(request,'accounts/dashboard.html',contex)

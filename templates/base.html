@@ -12,11 +12,22 @@
         <!-- Custom -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
       
-        <title>eEstate {% block title%} {% endblock %}</title>
+        <title>
+          {% if settings %}
+          {{settings.title}} 
+
+          {%else%}
+           MyApp 
+          {%endif%}
+          {% block title%} {% endblock %}
+        </title>
       </head>
       <style>
         #showcase {
             background-image: url({% static "img/showcase.jpg" %});
+        }
+        .bg-primary{
+          /*background-color:{{settings.theme_color}} !important  ;*/
         }
       </style>
     <body>
